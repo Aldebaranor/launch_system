@@ -7,11 +7,9 @@
 ```
 ┌── docs                                    #  项目文档
 ├── modules                                 #  项目模块
-│    ├── situation-common-base              #  基础设计
-│    ├── situation-common-liquibase         #  数据库管理工程
-│    ├── communication-situation-api        #  通信态势API
-│    ├── communication-situation-rest       #  通信态势REST
-│    ├── situation-launch-single            #  单体应用启动
+│    ├── management-common-base              #  基础设计
+│    ├── management-common-liquibase         #  数据库管理工程
+│    ├── management-launch-single            #  单体应用启动
 ├── pom.xml                                 
 └── readme.md                               
 ```
