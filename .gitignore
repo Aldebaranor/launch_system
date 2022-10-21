@@ -1,0 +1,13 @@
+/.idea/
+/logs/
+/target/
+/tmp/
+/.settings/
+.project
+/data/
+.DS_Store
+*.iml
+application-dev.yml
+/.gradle/
+logs
+

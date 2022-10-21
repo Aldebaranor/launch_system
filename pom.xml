@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.egova</groupId>
+        <artifactId>egova-bunches</artifactId>
+        <version>2.0.7-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.soul</groupId>
+    <artifactId>monitoring-management</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <docker.image.prefix>meta</docker.image.prefix>
+        <docker.repository>www.egova.top:30004</docker.repository>
+        <egova.base.version>5.0.4-SNAPSHOT</egova.base.version>
+        <egova.bunches.version>2.0.7-SNAPSHOT</egova.bunches.version>
+        <egova.pan.version>5.0.4-SNAPSHOT</egova.pan.version>
+        <project.snapshot.version>1.0.0-SNAPSHOT</project.snapshot.version>
+        <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
+        <jdk.version>1.8</jdk.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.shekhargulati</groupId>
+                <artifactId>strman</artifactId>
+                <version>0.4.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>egova-bunches-dependencies</artifactId>
+                <version>${egova.bunches.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Greenwich.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>egova-starter-platform</artifactId>
+                <version>${egova.bunches.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>egova-bunches-liquibase</artifactId>
+                <version>${egova.bunches.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>egova-bunches-iotdb</artifactId>
+                <version>${egova.bunches.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>egova-bunches-elasticsearch</artifactId>
+                <version>${egova.base.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>egova-common-liquibase</artifactId>
+                <version>${egova.base.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>egova-common-rest</artifactId>
+                <version>${egova.base.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>egova-security-api</artifactId>
+                <version>${egova.base.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>egova-security-rest</artifactId>
+                <version>${egova.base.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>egova-quartz-rest</artifactId>
+                <version>${egova.base.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>egova-oauth-api</artifactId>
+                <version>${egova.base.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>egova-oauth-rest</artifactId>
+                <version>${egova.base.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>egova-organ-api</artifactId>
+                <version>${egova.base.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>egova-organ-rest</artifactId>
+                <version>${egova.base.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>egova-generic-api</artifactId>
+                <version>${egova.base.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>egova-generic-rest</artifactId>
+                <version>${egova.base.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>egova-datasource-api</artifactId>
+                <version>${egova.base.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>egova-datasource-rest</artifactId>
+                <version>${egova.base.version}</version>
+            </dependency>
+
+            <!-- 数据服务 -->
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>ddcat-common-liquibase</artifactId>
+                <version>${egova.ddcat.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>ddcat-model-rest</artifactId>
+                <version>${egova.ddcat.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>ddcat-source-rest</artifactId>
+                <version>${egova.ddcat.version}</version>
+            </dependency>
+            <!-- 神州数据库驱动 -->
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>ddcat-driver-oscar</artifactId>
+                <version>${egova.ddcat.version}</version>
+            </dependency>
+            <!-- 达梦数据库驱动 -->
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>ddcat-driver-dm</artifactId>
+                <version>${egova.ddcat.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>8.0.17</version>
+            </dependency>
+
+            <!-- iotdb驱动 -->
+            <dependency>
+                <groupId>org.apache.iotdb</groupId>
+                <artifactId>iotdb-jdbc</artifactId>
+                <version>0.12.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>4.1.36.Final</version>
+            </dependency>
+
+
+            <!-- pan-->
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>pan-editor-rest</artifactId>
+                <version>${egova.pan.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>pan-client-sdk</artifactId>
+                <version>${egova.pan.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>pan-engine-rest</artifactId>
+                <version>${egova.pan.version}</version>
+                <!-- 引入的是${egova.pan.version}版本 -->
+                <exclusions>
+                    <exclusion>
+                        <artifactId>egova-organ-api</artifactId>
+                        <groupId>com.egova</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>com.egova</groupId>
+                <artifactId>pan-common-liquibase</artifactId>
+                <version>${egova.pan.version}</version>
+            </dependency>
+
+
+        </dependencies>
+    </dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <pluginManagement>
+            <plugins>
+                <!-- Compiler 插件, 设定JDK版本 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>${jdk.version}</source>
+                        <target>${jdk.version}</target>
+                        <encoding>UTF-8</encoding>
+                        <showWarnings>true</showWarnings>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <configuration>
+                        <skip>false</skip>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>attach-javadoc</id>
+                            <phase>none</phase>
+                        </execution>
+                    </executions>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <distributionManagement>
+        <repository>
+            <id>soul-nexus-releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://47.97.116.47:8020/repository/maven-releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>soul-nexus-snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://47.97.116.47:8020/repository/maven-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <modules>
+        <module>modules/management-common-base</module>
+        <module>modules/management-common-liquibase</module>
+        <module>modules/management-launch-single</module>
+        <module>modules/management-netty-rest</module>
+    </modules>
+
+</project>

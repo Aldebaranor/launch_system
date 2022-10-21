@@ -1,0 +1,109 @@
+version: '3.7'
+# 管理的服务
+services:
+
+  eureka-server:
+    image: egova/eureka
+    build: ./eureka
+    ports:
+      - "8761:8761"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      EUREKA_INSTANCE_HOSTNAME: eureka-server
+      EUREKA_INSTANCE_PREFERIPADDRESS: "false"
+    networks:
+      - cloud
+
+  gateway-server:
+    image: egova/gateway
+    build: ./gateway
+    ports:
+      - "8762:8762"
+    #   extra_hosts:                        # 设置容器 hosts
+    #     - "www.chensoft.com:127.0.0.1"
+    links:
+      - eureka-server
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      EUREKA_INSTANCE_HOSTNAME: gateway-server
+      EUREKA_INSTANCE_PREFERIPADDRESS: "false"
+    networks:
+      - cloud
+
+  security-server:
+    image: egova/security
+    build: ./security
+    ports:
+      - "8763:8763"
+    links:
+      - eureka-server
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      EUREKA_INSTANCE_HOSTNAME: security-server
+      EUREKA_INSTANCE_PREFERIPADDRESS: "false"
+      SPRING_REDIS_HOST: egova-redis
+      SPRING_DATASOURCE_URL: jdbc:mysql://egova-mysql:3306/might?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: hwits888
+    networks:
+      - cloud
+
+  admin-server:
+    image: egova/admin
+    build: ./admin
+    ports:
+      - "8764:8764"
+    links:
+      - eureka-server
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      EUREKA_INSTANCE_HOSTNAME: admin-server
+      EUREKA_INSTANCE_PREFERIPADDRESS: "false"
+      SPRING_REDIS_HOST: egova-redis
+      SPRING_DATASOURCE_URL: jdbc:mysql://egova-mysql:3306/might?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: hwits888
+    networks:
+      - cloud
+
+  egova-mysql:
+    image: mysql
+    restart: always
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - cloud
+    environment:
+      - TZ=Asia/Shanghai
+      - MYSQL_DATABASE=might
+      - MYSQL_USER=egova
+      - MYSQL_PASSWORD=hwits888
+      - MYSQL_ROOT_PASSWORD=hwits888
+
+    command:
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8
+      --collation-server=utf8_general_ci
+      --explicit_defaults_for_timestamp=true
+      --lower_case_table_names=1
+      --max_allowed_packet=128M;
+    volumes:
+      - /datas/docker/mysql/data:/var/lib/mysql
+  #     - ./initdb.d:/docker-entrypoint-initdb.d:ro
+
+  egova-redis:
+    image: redis
+    container_name: redis
+    restart: always
+    command: --appendonly yes
+    ports:
+      - 6379:6379
+    networks:
+      - cloud
+    volumes:
+      - /datas/docker/redis/data/redis:/data
+
+networks:
+  cloud:
+    driver: bridge
