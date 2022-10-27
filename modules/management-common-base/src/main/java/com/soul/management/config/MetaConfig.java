@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @Configuration
-@ConfigurationProperties(prefix = "meta.code")
+@ConfigurationProperties(prefix = "management.code")
 public class MetaConfig {
 
     private String unpackServiceCode;

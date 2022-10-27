@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class UnpackMassageFactory {
 
-    @Autowired
+
     private final Map<String, UnpackMessageService> map = new ConcurrentHashMap();
 
 

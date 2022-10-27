@@ -289,6 +289,9 @@
         <module>modules/management-common-liquibase</module>
         <module>modules/management-launch-single</module>
         <module>modules/management-netty-rest</module>
+        <module>modules/management-test-rest</module>
+        <module>modules/management-monitor-rest</module>
+        <module>modules/management-monitor-api</module>
     </modules>
 
 </project>
