@@ -18,12 +18,11 @@ public enum BulletType implements PropertyDescriptor {
     /**
      * 爆破弹
      */
-    BlastBomb("0","爆破弹"),
+    BlastBomb("0","弹类型1"),
     /**
      * 干扰弹
      */
-    JammingBomb("1","干扰弹"),
-
+    JammingBomb("1","弹类型2"),
     ;
 
     private final String value;

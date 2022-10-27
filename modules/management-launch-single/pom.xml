@@ -30,7 +30,7 @@
         </dependency>
         <dependency>
             <groupId>com.soul</groupId>
-            <artifactId>situation-common-liquibase</artifactId>
+            <artifactId>management-common-liquibase</artifactId>
             <version>${project.version}</version>
         </dependency>
 
