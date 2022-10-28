@@ -1,14 +1,22 @@
 package com.soul.monitor.controller.unity;
 
 
+import com.egova.model.PageResult;
+import com.egova.model.QueryModel;
+import com.egova.persistent.ClauseBuilder;
 import com.egova.web.annotation.Api;
+import com.flagwind.persistent.model.Clause;
+import com.flagwind.persistent.model.SingleClause;
 import com.soul.monitor.entity.MonitorCar;
 import com.soul.monitor.entity.MonitorEquipment;
+import com.soul.monitor.entity.MonitorEquipmentStatus;
 import com.soul.monitor.entity.MonitorLauncher;
 import com.soul.monitor.enums.StatusType;
+import com.soul.monitor.model.MonitorAlert;
 import com.soul.monitor.model.MonitorCombat;
 import com.soul.monitor.service.MonitorCarService;
 import com.soul.monitor.service.MonitorEquipmentService;
+import com.soul.monitor.service.MonitorEquipmentStatusService;
 import com.soul.monitor.service.MonitorLauncherService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +36,8 @@ public class MonitorCarController {
     private final MonitorLauncherService monitorLauncherService;
 
     private final MonitorEquipmentService monitorEquipmentService;
+
+    private final MonitorEquipmentStatusService monitorEquipmentStatusService;
 
 
     /**
@@ -80,6 +90,24 @@ public class MonitorCarController {
     @GetMapping("/launcher/{carId}")
     public List<MonitorLauncher> getLauncherByCarId(@PathVariable String carId){
         return monitorLauncherService.getLauncherByCarId(carId);
+    }
+
+    /**
+     * 获取告警数据
+     */
+    @Api
+    @GetMapping("/alert/{carId}")
+    public MonitorAlert getAlert(@PathVariable String carId){
+        return monitorEquipmentStatusService.getAlert(carId);
+    }
+
+    /**
+     * 分页获取告警数据
+     */
+    @Api
+    @PostMapping("/page/alert")
+    public PageResult<MonitorEquipmentStatus> getPageAlert(@RequestBody QueryModel<MonitorEquipmentStatus> queryModel){
+        return monitorEquipmentStatusService.getPageAlert(queryModel);
     }
 
 }

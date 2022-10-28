@@ -34,7 +34,7 @@ public enum StatusType implements PropertyDescriptor {
      * 空闲
      */
     Idle("4","空闲"),
-    /** 发射架
+    /**
      * 运行
      */
     Run("5","运行"),

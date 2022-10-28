@@ -1,0 +1,70 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+
+    <changeSet author="shizuan (generated)" id="1666958206849-1">
+        <createTable tableName="monitor_car">
+            <column name="id" remarks="主键" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="type" remarks="发射车类型" type="VARCHAR(11)"/>
+            <column name="cname" remarks="发射车中文名" type="VARCHAR(255)"/>
+            <column name="ename" remarks="发射车英文名" type="VARCHAR(255)"/>
+            <column name="video1" remarks="发射车视频监控1" type="VARCHAR(255)"/>
+            <column name="video2" remarks="发射车视频监控2" type="VARCHAR(255)"/>
+            <column name="video3" remarks="发射车视频监控3" type="VARCHAR(255)"/>
+            <column name="video4" remarks="发射车视频监控4" type="VARCHAR(255)"/>
+            <column name="video5" remarks="发射车视频监控5" type="VARCHAR(255)"/>
+            <column name="video6" remarks="发射车视频监控6" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="shizuan (generated)" id="1666958206849-2">
+        <createTable tableName="monitor_equipment">
+            <column name="id" remarks="主键ID" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="carType" remarks="发射车类型" type="VARCHAR(50)"/>
+            <column name="cname" remarks="设备中文名称" type="VARCHAR(255)"/>
+            <column name="ename" remarks="设备英文名称" type="VARCHAR(255)"/>
+            <column name="parentId" remarks="父ID" type="VARCHAR(50)"/>
+            <column name="grade" remarks="等级" type="INT"/>
+            <column name="sort" remarks="排序字段" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="shizuan (generated)" id="1666958206849-3">
+        <createTable tableName="monitor_equipment_status">
+            <column name="id" remarks="主键ID" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="carId" remarks="发射车ID" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="equipmentId" remarks="装备编号" type="VARCHAR(11)"/>
+            <column name="selfStatus" remarks="自检状态" type="VARCHAR(11)"/>
+            <column name="workStatus" remarks="工作状态" type="VARCHAR(11)"/>
+            <column name="time" remarks="采纳时间" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="shizuan (generated)" id="1666958206849-4">
+        <createTable tableName="monitor_launcher">
+            <column name="id" remarks="主键Id" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="carId" remarks="发射车Id" type="VARCHAR(50)"/>
+            <column name="code" remarks="发射架编号" type="VARCHAR(11)"/>
+            <column name="type" remarks="弹类型" type="VARCHAR(11)"/>
+            <column name="rocket1" remarks="发射孔1 状态" type="VARCHAR(11)"/>
+            <column name="rocket2" remarks="发射孔2 状态" type="VARCHAR(11)"/>
+            <column name="rocket3" remarks="发射孔3 状态" type="VARCHAR(11)"/>
+            <column name="rocket4" remarks="发射孔4 状态" type="VARCHAR(11)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="shizuan (generated)" id="1666958206849-5">
+        <sqlFile path="monitoring-management.sql"/>
+    </changeSet>
+
+</databaseChangeLog>

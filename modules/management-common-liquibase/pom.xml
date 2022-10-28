@@ -40,7 +40,7 @@
                     <propertyFile>src/main/resources/db/liquibase.properties</propertyFile>
                     <propertyFileWillOverride>true</propertyFileWillOverride>
                     <!--生成文件的路径-->
-                    <outputChangeLogFile>src/main/resources/db/changelog/situation.changelog-table.xml</outputChangeLogFile>
+                    <outputChangeLogFile>src/main/resources/db/changelog/monitor.changelog-table.xml</outputChangeLogFile>
                 </configuration>
                 <executions>
                 </executions>
