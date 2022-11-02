@@ -3,10 +3,7 @@ package com.soul.monitor.controller.unity;
 
 import com.egova.model.PageResult;
 import com.egova.model.QueryModel;
-import com.egova.persistent.ClauseBuilder;
 import com.egova.web.annotation.Api;
-import com.flagwind.persistent.model.Clause;
-import com.flagwind.persistent.model.SingleClause;
 import com.soul.monitor.entity.MonitorCar;
 import com.soul.monitor.entity.MonitorEquipment;
 import com.soul.monitor.entity.MonitorEquipmentStatus;
@@ -14,10 +11,8 @@ import com.soul.monitor.entity.MonitorLauncher;
 import com.soul.monitor.enums.StatusType;
 import com.soul.monitor.model.MonitorAlert;
 import com.soul.monitor.model.MonitorCombat;
-import com.soul.monitor.service.MonitorCarService;
-import com.soul.monitor.service.MonitorEquipmentService;
-import com.soul.monitor.service.MonitorEquipmentStatusService;
-import com.soul.monitor.service.MonitorLauncherService;
+import com.soul.monitor.model.MonitorMobileModel;
+import com.soul.monitor.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +33,8 @@ public class MonitorCarController {
     private final MonitorEquipmentService monitorEquipmentService;
 
     private final MonitorEquipmentStatusService monitorEquipmentStatusService;
+
+    private final MonitorMobileService monitorMobileService;
 
 
     /**
@@ -108,6 +105,15 @@ public class MonitorCarController {
     @PostMapping("/page/alert")
     public PageResult<MonitorEquipmentStatus> getPageAlert(@RequestBody QueryModel<MonitorEquipmentStatus> queryModel){
         return monitorEquipmentStatusService.getPageAlert(queryModel);
+    }
+
+    /**
+     * 获取发射车任务状态的机动列表
+     */
+    @Api
+    @GetMapping("/mobile/{carId}")
+    public MonitorMobileModel getMobile(@PathVariable String carId){
+        return monitorMobileService.getByCarId(carId);
     }
 
 }
